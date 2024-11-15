@@ -16,6 +16,20 @@ services:
     networks:
       - dbt-network
 
+    # Python service (for running your script)
+  python:
+    build: .
+    container_name: python-script
+    environment:
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+      - DB_HOST=postgres-db
+      - DB_NAME=raw_db
+    depends_on:
+      - postgres
+    networks:
+      - dbt-network
+
 
   dbt:
     image: ghcr.io/dbt-labs/dbt-postgres:1.8.2
