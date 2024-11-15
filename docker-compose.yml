@@ -24,7 +24,7 @@ services:
       - DB_USER=myuser
       - DB_PASSWORD=mypassword
       - DB_HOST=postgres-db
-      - DB_NAME=raw_db
+      - DB_NAME=prod_db
     depends_on:
       - postgres
     networks:
@@ -37,7 +37,8 @@ services:
     environment:
       DBT_PROFILE_DIR: /usr/app/dbt/profiles
     volumes:
-      - ./dbt:/usr/app/dbt
+      - ./dbt/metrics:/usr/app/dbt
+      - ./dbt/profiles.yml:/root/.dbt/profiles.yml
     working_dir: /usr/app/dbt
     depends_on:
       - postgres

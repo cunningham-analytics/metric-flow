@@ -1,0 +1,20 @@
+version: 2
+
+custom_metrics:
+  - name: "Total Crimes Committed"
+    calculation: "count(*)"
+    base_table: "stg__crime_incidents_2024"
+    fields_to_aggregate:
+      - method
+      - offense
+    filters:
+      - filter_name: "day_shift"
+        expression: "shift = 'DAY'"
+      - filter_name: "overall"
+      - expression: "true = true"
+    date_field: "report_date"
+    date_grain:
+      - day
+      - week
+      - month
+
