@@ -1,8 +1,14 @@
 version: 2
 
 sources:
-  - name: raw_db
-    database: raw_db
+  - name: prod_db
+    database: prod_db
+    schema: raw
+    tables:
+      - name: crime_incidents_2024
+        description: "Raw crime data from 2024 in DC."
+  - name: dev_db
+    database: dev_db
     schema: raw
     tables:
       - name: crime_incidents_2024

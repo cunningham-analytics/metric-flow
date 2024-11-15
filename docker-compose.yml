@@ -24,7 +24,7 @@ services:
       - DB_USER=myuser
       - DB_PASSWORD=mypassword
       - DB_HOST=postgres-db
-      - DB_NAME=prod_db
+      - DB_NAME=dev_db
     depends_on:
       - postgres
     networks:

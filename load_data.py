@@ -34,12 +34,15 @@ table_name = 'crime_incidents_2024'
 
 # Create a PostgreSQL connection string (using SQLAlchemy)
 connection_string = f'postgresql+psycopg2://{db_user}:{db_password}@{db_host}:5432/{db_name}'
+connection_string_prod = f'postgresql+psycopg2://{db_user}:{db_password}@{db_host}:5432/prod_db'
 
 # Create a SQLAlchemy engine
 engine = create_engine(connection_string)
+engine_prod = create_engine(connection_string_prod)
 
 # If the table already exists, you can choose to append or replace it
 # Use "replace" to overwrite or "append" to add new records
 df.to_sql(table_name, engine, schema=schema_name, if_exists='replace', index=False)
+df.to_sql(table_name, engine_prod, schema=schema_name, if_exists='replace', index=False)
 
 print(f"Data loaded into PostgreSQL table '{table_name}' successfully.")
