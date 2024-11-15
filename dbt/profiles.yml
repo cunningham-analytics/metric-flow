@@ -1,0 +1,23 @@
+metrics:
+  target: dev  # Set default target to dev (you can change this if needed)
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: myuser
+      password: mypassword
+      port: 5432
+      dbname: dev_db
+      schema: public
+      threads: 1
+      sslmode: disable  # Disable SSL, only if you're not using SSL
+    prod:
+      type: postgres
+      host: postgres
+      user: myuser
+      password: mypassword
+      port: 5432
+      dbname: prod_db
+      schema: public
+      threads: 1
+      sslmode: disable  # Disable SSL, only if you're not using SSL

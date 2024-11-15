@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: dev_db  # Default database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Persist PostgreSQL data
+      - ./init:/docker-entrypoint-initdb.d  # Mount the local ./init directory to the container's init directory
+    networks:
+      - dbt-network
+
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.8.2
+    container_name: dbt
+    environment:
+      DBT_PROFILE_DIR: /usr/app/dbt/profiles
+    volumes:
+      - ./dbt:/usr/app/dbt
+    working_dir: /usr/app/dbt
+    depends_on:
+      - postgres
+    networks:
+      - dbt-network
+
+networks:
+  dbt-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
